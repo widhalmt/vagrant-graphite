@@ -1,0 +1,31 @@
+instance = "default"
+max_procs = 2
+listen_addr = "0.0.0.0:2003"
+pickle_addr = "0.0.0.0:2013"
+admin_addr = "0.0.0.0:2004"
+http_addr = "0.0.0.0:8081"
+spool_dir = "/var/spool/carbon-relay-ng"
+pid_file = "/var/run/carbon-relay-ng.pid"
+log_level = "notice"
+bad_metrics_max_age = "24h"
+validation_level_legacy = "medium"
+validation_level_m20 = "medium"
+validate_order = false
+init = [
+	'addRoute sendAllMatch carbon-default  <%= @carbon_cache_ip %>:<%= @carbon_cache_port %> spool=true pickle=false',
+]
+[amqp]
+amqp_enabled = false
+amqp_host = "localhost"
+amqp_port = 5672
+amqp_user = "guest"
+amqp_password = "guest"
+amqp_vhost = "/graphite"
+amqp_exchange = "metrics"
+amqp_queue = ""
+amqp_key = "#"
+amqp_durable = false
+amqp_exclusive = true
+[instrumentation]
+graphite_addr = "localhost:2003"
+graphite_interval = 1000  # in ms
